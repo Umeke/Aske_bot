@@ -1,0 +1,15 @@
+[Unit]
+Description=CAST Django Web (gunicorn)
+After=network.target postgresql.service
+
+[Service]
+User=cast
+WorkingDirectory=/home/cast/cast
+EnvironmentFile=/home/cast/cast/.env
+ExecStart=/home/cast/cast/.venv/bin/gunicorn cast.wsgi:application \
+    --bind 127.0.0.1:8000 --workers 3 --access-logfile -
+Restart=always
+RestartSec=5
+
+[Install]
+WantedBy=multi-user.target
