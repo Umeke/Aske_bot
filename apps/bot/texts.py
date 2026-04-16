@@ -24,6 +24,9 @@ APPROVED_MESSAGE = (
 REJECTED_MESSAGE = "Thank you for applying. Unfortunately your application was not approved at this time."
 
 WELCOME_IN_GROUP = (
-    "Welcome to CAST, <b>{name}</b>! 👋\n"
-    "Please introduce yourself in the Introductions topic."
+    "{mention} How to introduce yourself:\n"
+    "• Name\n"
+    "• Field\n"
+    "• Institution\n"
+    "• Specific Interests"
 )

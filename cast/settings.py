@@ -63,5 +63,6 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 BOT_TOKEN = config("BOT_TOKEN")
 CAST_GROUP_ID = config("CAST_GROUP_ID", cast=int)
+CAST_INTRODUCTIONS_TOPIC_ID = config("CAST_INTRODUCTIONS_TOPIC_ID", default=0, cast=int)
 ADMIN_CHAT_ID = config("ADMIN_CHAT_ID", cast=int)
 INVITE_TTL_HOURS = config("INVITE_TTL_HOURS", default=24, cast=int)

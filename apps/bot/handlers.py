@@ -280,5 +280,9 @@ async def on_member_update(event: ChatMemberUpdated) -> None:
     app = await mark_joined(user.id)
     if app is None:
         return
-    name = await sync_to_async(lambda: app.display_name)()
-    await event.bot.send_message(settings.CAST_GROUP_ID, texts.WELCOME_IN_GROUP.format(name=name))
+    mention = f"@{user.username}" if user.username else user.mention_html(user.full_name)
+    await event.bot.send_message(
+        chat_id=settings.CAST_GROUP_ID,
+        text=texts.WELCOME_IN_GROUP.format(mention=mention),
+        message_thread_id=settings.CAST_INTRODUCTIONS_TOPIC_ID or None,
+    )
