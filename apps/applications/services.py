@@ -75,10 +75,12 @@ def mark_rejected(application_id: int, reviewer_id: int | None = None) -> None:
 
 @sync_to_async
 def mark_joined(telegram_id: int) -> Application | None:
+    """Return the application only on first join; None for rejoins."""
     app = Application.objects.filter(telegram_id=telegram_id).first()
-    if app and not app.joined_group:
-        app.joined_group = True
-        app.save(update_fields=["joined_group"])
+    if not app or app.joined_group:
+        return None
+    app.joined_group = True
+    app.save(update_fields=["joined_group"])
     return app
 
 
