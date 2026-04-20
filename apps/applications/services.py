@@ -10,9 +10,10 @@ from datetime import timedelta
 
 from asgiref.sync import sync_to_async
 from django.conf import settings
+from django.db.models import Prefetch
 from django.utils import timezone
 
-from .models import Answer, Application, Question
+from .models import Answer, Application, Question, QuestionOption
 
 
 @dataclass
@@ -23,7 +24,11 @@ class SubmittedAnswer:
 
 @sync_to_async
 def get_active_questions() -> list[Question]:
-    return list(Question.objects.filter(is_active=True).prefetch_related("options"))
+    active_options = Prefetch(
+        "options",
+        queryset=QuestionOption.objects.filter(is_active=True).order_by("order"),
+    )
+    return list(Question.objects.filter(is_active=True).prefetch_related(active_options))
 
 
 @sync_to_async

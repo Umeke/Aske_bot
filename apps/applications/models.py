@@ -26,6 +26,7 @@ class QuestionOption(models.Model):
     order = models.PositiveIntegerField(default=0)
     value = models.SlugField()
     label = models.CharField(max_length=100)
+    is_active = models.BooleanField(default=True)
 
     class Meta:
         ordering = ["order"]

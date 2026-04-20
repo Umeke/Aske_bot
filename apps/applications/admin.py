@@ -10,8 +10,7 @@ from .models import Answer, Application, Question, QuestionOption
 class QuestionOptionInline(admin.TabularInline):
     model = QuestionOption
     extra = 1
-    fields = ("order", "value", "label")
-
+    fields = ("order", "value", "label", "is_active")
 
 @admin.register(Question)
 class QuestionAdmin(admin.ModelAdmin):
