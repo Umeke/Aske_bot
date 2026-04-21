@@ -281,8 +281,14 @@ async def on_member_update(event: ChatMemberUpdated) -> None:
     if app is None:
         return
     mention = f"@{user.username}" if user.username else user.mention_html(user.full_name)
+    thread_id = settings.CAST_INTRODUCTIONS_TOPIC_ID or None
     await event.bot.send_message(
         chat_id=settings.CAST_GROUP_ID,
         text=texts.WELCOME_IN_GROUP.format(mention=mention),
-        message_thread_id=settings.CAST_INTRODUCTIONS_TOPIC_ID or None,
+        message_thread_id=thread_id,
+    )
+    await event.bot.send_message(
+        chat_id=settings.CAST_GROUP_ID,
+        text=texts.RULES_REMINDER,
+        message_thread_id=thread_id,
     )
